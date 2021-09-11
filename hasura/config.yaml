@@ -1,0 +1,4 @@
+version: 3
+endpoint: https://gumroad.hasura.app
+admin_secret: hkYSTIf6cLskqxG11M1eeq8dqWhTyZWMxq9OO3wG6UL5OOwrUbLyghccWuLtC1E5
+metadata_directory: metadata
