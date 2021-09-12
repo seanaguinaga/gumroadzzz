@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;1,300;1,600&display=swap');
 
-$bg: slateblue;
+$bg: white;
 
 *,
 *::before,
@@ -17,7 +17,15 @@ html {
 
 body {
 	font-family: 'Open Sans', sans-serif;
-	color: white;
-
+	color: black;
 	background: $bg;
+}
+
+
+.centered {
+	position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
 }
