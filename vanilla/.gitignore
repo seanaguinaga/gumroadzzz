@@ -1,0 +1,7 @@
+node_modules
+dist
+development
+.cache
+.code-workspace
+.DStore
+.vscode

@@ -1,0 +1,28 @@
+{
+  "author": "",
+  "bugs": {
+    "url": "https://github.com/nardove/vanilla-js-template/issues"
+  },
+  "description": "I'm using this as a template for creating vanilla js projects using webpack.",
+  "devDependencies": {
+    "@babel/core": "^7.15.5",
+    "@babel/plugin-transform-runtime": "^7.15.0",
+    "@babel/runtime-corejs2": "^7.15.4",
+    "@parcel/transformer-sass": "^2.0.0-rc.0",
+    "parcel": "^2.0.0-rc.0",
+    "sass": "^1.39.2"
+  },
+  "homepage": "https://github.com/nardove/vanilla-js-template#readme",
+  "license": "ISC",
+  "main": "./src/js/index.js",
+  "name": "vanilla-js-template",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nardove/vanilla-js-template.git"
+  },
+  "scripts": {
+    "build": "parcel build public/index.html --out-dir dist --public-url ./",
+    "dev": "rm -rf ./development && rm -rf ./.cache && parcel public/index.html --dist-dir development -p 3000"
+  },
+  "version": "1.0.0"
+}
