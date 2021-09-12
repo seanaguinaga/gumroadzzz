@@ -23,7 +23,10 @@ body {
 
 
 .centered {
+	width: 100%;
+	max-width: 440px;
 	position: absolute;
+	margin: auto;
   left: 0;
   right: 0;
   top: 50%;

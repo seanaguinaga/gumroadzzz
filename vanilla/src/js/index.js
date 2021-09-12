@@ -8,6 +8,17 @@ import { graphql } from "./graphql";
             product {
               id
               name
+              reviews {
+                rating
+                text
+              }
+              reviews_aggregate {
+                aggregate {
+                  avg {
+                    rating
+                  }
+                }
+              }
             }
         }`,
   });
@@ -19,34 +30,44 @@ function renderProduct(data) {
   <div class="centered">
     ${data.product
       ?.map((product) => {
-        console.log(product);
         return `
         <div>
         <span><h6>${product.name}</h6>
-        <button value="${product.id}">Review</button>
         </span>
+        ${renderProductReviewsAggregateAndButton(product)}
+        ${renderProductReviewsList(product)}
         </div>
       `;
       })
       .join("")}
-      ${renderProductReviews(data.product)}
    </div> 
   `;
 }
 
-function renderProductReviews(product) {
+function renderProductReviewsAggregateAndButton(product) {
+  return product?.reviews_aggregate?.aggregate?.avg?.rating
+    ? `
+    <div>
+      <div><h2>${product?.reviews_aggregate?.aggregate?.avg?.rating}</h2></div>
+    </div>
+     <button value="${product.id}">Review</button>
+  `
+    : `<button value="${product.id}">Review</button>`;
+}
+
+function renderProductReviewsList(product) {
   return product?.reviews?.length > 0
     ? `
     <div>
       ${product.reviews
         ?.map(
           (review) =>
-            `<div style="grid-area: statistic${review.number}"><h1 class="statisticTitle">${review.rating}</h1><h2 class="statisticSubtitle">${statistic.fabric}</h2></div><hr class="smallLine" />`
+            `<div><h1 class="statisticTitle">${review.rating}</h1><h2 class="statisticSubtitle">${review.text}</h2></div><hr class="smallLine" />`
         )
         .join("")}
     </div>
   `
-    : `<div>No Reviews</div>`;
+    : `<div><h6>No Reviews</h6></div>`;
 }
 
 // Mobile Event Listener for Showing/Hiding Content
