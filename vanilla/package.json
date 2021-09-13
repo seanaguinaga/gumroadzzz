@@ -24,5 +24,8 @@
     "build": "parcel build public/index.html --out-dir dist --public-url ./",
     "dev": "rm -rf ./development && rm -rf ./.cache && parcel public/index.html --dist-dir development -p 3000"
   },
-  "version": "1.0.0"
+  "version": "1.0.0",
+  "dependencies": {
+    "graphql-ws": "^5.5.0"
+  }
 }

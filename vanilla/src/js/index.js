@@ -22,7 +22,48 @@ import { graphql } from "./graphql";
             }
         }`,
   });
+
   document.body.innerHTML = renderProduct(data);
+
+  let displayStars = [...document.getElementsByClassName("display__star")];
+
+  function displayRatingAggregate(stars, rating) {
+    let starClassActive = "display__star fas fa-star";
+    document.getElementById("review_aggregate_display").innerHTML = rating;
+    rating--;
+    stars.forEach(() => {
+      for (rating; rating >= 0; --rating)
+        stars[rating].className = starClassActive;
+    });
+  }
+
+  displayRatingAggregate(displayStars, 3);
+
+  let ratingStars = [...document.getElementsByClassName("rating__star")];
+
+  function executeRating(stars) {
+    let starClassActive = "rating__star fas fa-star";
+    let starClassInactive = "rating__star far fa-star";
+    let starsLength = stars.length;
+    let rating;
+    stars.map((star) => {
+      star.onclick = () => {
+        console.log("nothing");
+        rating = stars.indexOf(star);
+        document.getElementById("review_mutation_display").innerHTML =
+          rating + 1;
+        if (star.className === starClassInactive) {
+          for (rating; rating >= 0; --rating)
+            stars[rating].className = starClassActive;
+        } else {
+          for (rating; rating < starsLength; ++rating)
+            stars[rating].className = starClassInactive;
+        }
+      };
+    });
+  }
+
+  executeRating(ratingStars);
 })();
 
 function renderProduct(data) {
@@ -35,6 +76,7 @@ function renderProduct(data) {
         <span><h6>${product.name}</h6>
         </span>
         ${renderProductReviewsAggregateAndButton(product)}
+        ${renderReviewForm()}
         ${renderProductReviewsList(product)}
         </div>
       `;
@@ -44,15 +86,45 @@ function renderProduct(data) {
   `;
 }
 
+function renderReviewForm() {
+  return `
+  <form>
+   <div style="display: flex; justify-content: space-between">
+   <h6 id="review_mutation_display"></h6>
+    <div class="rating">
+    <i class="rating__star far fa-star"></i>
+    <i class="rating__star far fa-star"></i>
+    <i class="rating__star far fa-star"></i>
+    <i class="rating__star far fa-star"></i>
+    <i class="rating__star far fa-star"></i>
+    </div>
+    </div>
+    <input/>
+    <button type="submit">Submit</button>
+    </form/>
+  `;
+}
+
 function renderProductReviewsAggregateAndButton(product) {
   return product?.reviews_aggregate?.aggregate?.avg?.rating
     ? `
     <div>
-      <div><h2>${product?.reviews_aggregate?.aggregate?.avg?.rating}</h2></div>
+      <h2>${product?.reviews_aggregate?.aggregate?.avg?.rating}</h2>
     </div>
      <button value="${product.id}">Review</button>
   `
-    : `<button value="${product.id}">Review</button>`;
+    : `
+    <div style="display: flex; justify-content: space-between">
+    <h6 id="review_aggregate_display"></h6>
+    <div class="display">
+    <i class="display__star far fa-star"></i>
+    <i class="display__star far fa-star"></i>
+    <i class="display__star far fa-star"></i>
+    <i class="display__star far fa-star"></i>
+    <i class="display__star far fa-star"></i>         
+    </div>
+    <button value="${product.id}">Review</button>
+    </div>`;
 }
 
 function renderProductReviewsList(product) {
@@ -62,7 +134,7 @@ function renderProductReviewsList(product) {
       ${product.reviews
         ?.map(
           (review) =>
-            `<div><h1 class="statisticTitle">${review.rating}</h1><h2 class="statisticSubtitle">${review.text}</h2></div><hr class="smallLine" />`
+            `<h1 class="statisticTitle">${review.rating}</h1><h2 class="statisticSubtitle">${review.text}</h2>`
         )
         .join("")}
     </div>

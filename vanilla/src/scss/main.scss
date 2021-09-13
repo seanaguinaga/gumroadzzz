@@ -32,3 +32,8 @@ body {
   top: 50%;
   transform: translateY(-50%);
 }
+
+.rating__star, .display__star {
+   cursor: pointer;
+   color: #dabd18b2;
+}
