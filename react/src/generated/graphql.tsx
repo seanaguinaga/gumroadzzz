@@ -752,43 +752,170 @@ export type Uuid_Comparison_Exp = {
   _nin?: Maybe<Array<Scalars['uuid']>>;
 };
 
-export type ListReviewsQueryVariables = Exact<{ [key: string]: never; }>;
+export type InsertReviewMutationVariables = Exact<{
+  review_insert_input: Review_Insert_Input;
+}>;
 
 
-export type ListReviewsQuery = { __typename?: 'query_root', review: Array<{ __typename?: 'review', id: any }> };
+export type InsertReviewMutation = { __typename?: 'mutation_root', insert_review_one?: Maybe<{ __typename?: 'review', rating: any, text: string }> };
+
+export type ListAllProducsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export const ListReviewsDocument = gql`
-    query listReviews {
-  review {
+export type ListAllProducsQuery = { __typename?: 'query_root', product: Array<{ __typename?: 'product', id: any }> };
+
+export type GetReviewsAggregateQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetReviewsAggregateQuery = { __typename?: 'query_root', review_aggregate: { __typename?: 'review_aggregate', aggregate?: Maybe<{ __typename?: 'review_aggregate_fields', avg?: Maybe<{ __typename?: 'review_avg_fields', rating?: Maybe<number> }> }> } };
+
+export type ListProductReviewsQueryVariables = Exact<{
+  product_id: Scalars['uuid'];
+}>;
+
+
+export type ListProductReviewsQuery = { __typename?: 'query_root', review: Array<{ __typename?: 'review', rating: any, text: string }> };
+
+
+export const InsertReviewDocument = gql`
+    mutation insertReview($review_insert_input: review_insert_input!) {
+  insert_review_one(object: $review_insert_input) {
+    rating
+    text
+  }
+}
+    `;
+export type InsertReviewMutationFn = Apollo.MutationFunction<InsertReviewMutation, InsertReviewMutationVariables>;
+
+/**
+ * __useInsertReviewMutation__
+ *
+ * To run a mutation, you first call `useInsertReviewMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useInsertReviewMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [insertReviewMutation, { data, loading, error }] = useInsertReviewMutation({
+ *   variables: {
+ *      review_insert_input: // value for 'review_insert_input'
+ *   },
+ * });
+ */
+export function useInsertReviewMutation(baseOptions?: Apollo.MutationHookOptions<InsertReviewMutation, InsertReviewMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<InsertReviewMutation, InsertReviewMutationVariables>(InsertReviewDocument, options);
+      }
+export type InsertReviewMutationHookResult = ReturnType<typeof useInsertReviewMutation>;
+export type InsertReviewMutationResult = Apollo.MutationResult<InsertReviewMutation>;
+export type InsertReviewMutationOptions = Apollo.BaseMutationOptions<InsertReviewMutation, InsertReviewMutationVariables>;
+export const ListAllProducsDocument = gql`
+    query listAllProducs {
+  product {
     id
   }
 }
     `;
 
 /**
- * __useListReviewsQuery__
+ * __useListAllProducsQuery__
  *
- * To run a query within a React component, call `useListReviewsQuery` and pass it any options that fit your needs.
- * When your component renders, `useListReviewsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * To run a query within a React component, call `useListAllProducsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useListAllProducsQuery` returns an object from Apollo Client that contains loading, error, and data properties
  * you can use to render your UI.
  *
  * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
  *
  * @example
- * const { data, loading, error } = useListReviewsQuery({
+ * const { data, loading, error } = useListAllProducsQuery({
  *   variables: {
  *   },
  * });
  */
-export function useListReviewsQuery(baseOptions?: Apollo.QueryHookOptions<ListReviewsQuery, ListReviewsQueryVariables>) {
+export function useListAllProducsQuery(baseOptions?: Apollo.QueryHookOptions<ListAllProducsQuery, ListAllProducsQueryVariables>) {
         const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<ListReviewsQuery, ListReviewsQueryVariables>(ListReviewsDocument, options);
+        return Apollo.useQuery<ListAllProducsQuery, ListAllProducsQueryVariables>(ListAllProducsDocument, options);
       }
-export function useListReviewsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<ListReviewsQuery, ListReviewsQueryVariables>) {
+export function useListAllProducsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<ListAllProducsQuery, ListAllProducsQueryVariables>) {
           const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<ListReviewsQuery, ListReviewsQueryVariables>(ListReviewsDocument, options);
+          return Apollo.useLazyQuery<ListAllProducsQuery, ListAllProducsQueryVariables>(ListAllProducsDocument, options);
         }
-export type ListReviewsQueryHookResult = ReturnType<typeof useListReviewsQuery>;
-export type ListReviewsLazyQueryHookResult = ReturnType<typeof useListReviewsLazyQuery>;
-export type ListReviewsQueryResult = Apollo.QueryResult<ListReviewsQuery, ListReviewsQueryVariables>;
+export type ListAllProducsQueryHookResult = ReturnType<typeof useListAllProducsQuery>;
+export type ListAllProducsLazyQueryHookResult = ReturnType<typeof useListAllProducsLazyQuery>;
+export type ListAllProducsQueryResult = Apollo.QueryResult<ListAllProducsQuery, ListAllProducsQueryVariables>;
+export const GetReviewsAggregateDocument = gql`
+    query getReviewsAggregate {
+  review_aggregate {
+    aggregate {
+      avg {
+        rating
+      }
+    }
+  }
+}
+    `;
+
+/**
+ * __useGetReviewsAggregateQuery__
+ *
+ * To run a query within a React component, call `useGetReviewsAggregateQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetReviewsAggregateQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetReviewsAggregateQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useGetReviewsAggregateQuery(baseOptions?: Apollo.QueryHookOptions<GetReviewsAggregateQuery, GetReviewsAggregateQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetReviewsAggregateQuery, GetReviewsAggregateQueryVariables>(GetReviewsAggregateDocument, options);
+      }
+export function useGetReviewsAggregateLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetReviewsAggregateQuery, GetReviewsAggregateQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetReviewsAggregateQuery, GetReviewsAggregateQueryVariables>(GetReviewsAggregateDocument, options);
+        }
+export type GetReviewsAggregateQueryHookResult = ReturnType<typeof useGetReviewsAggregateQuery>;
+export type GetReviewsAggregateLazyQueryHookResult = ReturnType<typeof useGetReviewsAggregateLazyQuery>;
+export type GetReviewsAggregateQueryResult = Apollo.QueryResult<GetReviewsAggregateQuery, GetReviewsAggregateQueryVariables>;
+export const ListProductReviewsDocument = gql`
+    query listProductReviews($product_id: uuid!) {
+  review(where: {product_id: {_eq: $product_id}}) {
+    rating
+    text
+  }
+}
+    `;
+
+/**
+ * __useListProductReviewsQuery__
+ *
+ * To run a query within a React component, call `useListProductReviewsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useListProductReviewsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useListProductReviewsQuery({
+ *   variables: {
+ *      product_id: // value for 'product_id'
+ *   },
+ * });
+ */
+export function useListProductReviewsQuery(baseOptions: Apollo.QueryHookOptions<ListProductReviewsQuery, ListProductReviewsQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<ListProductReviewsQuery, ListProductReviewsQueryVariables>(ListProductReviewsDocument, options);
+      }
+export function useListProductReviewsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<ListProductReviewsQuery, ListProductReviewsQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<ListProductReviewsQuery, ListProductReviewsQueryVariables>(ListProductReviewsDocument, options);
+        }
+export type ListProductReviewsQueryHookResult = ReturnType<typeof useListProductReviewsQuery>;
+export type ListProductReviewsLazyQueryHookResult = ReturnType<typeof useListProductReviewsLazyQuery>;
+export type ListProductReviewsQueryResult = Apollo.QueryResult<ListProductReviewsQuery, ListProductReviewsQueryVariables>;
