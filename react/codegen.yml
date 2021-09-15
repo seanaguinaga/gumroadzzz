@@ -1,0 +1,14 @@
+overwrite: true
+schema:
+  - "https://gumroad.hasura.app/v1/graphql":
+      headers:
+        X-Hasura-Admin-Secret: "hkYSTIf6cLskqxG11M1eeq8dqWhTyZWMxq9OO3wG6UL5OOwrUbLyghccWuLtC1E5"
+documents: "./src/components/**/*.{ts,tsx}"
+generates:
+  src/generated/graphql.tsx:
+    plugins:
+      - "typescript"
+      - "typescript-operations"
+      - "typescript-react-apollo"
+    config:
+      withHooks: true
