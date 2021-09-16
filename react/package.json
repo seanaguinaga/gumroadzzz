@@ -21,9 +21,11 @@
     "@types/react": "^17.0.21",
     "@types/react-dom": "^17.0.9",
     "graphql": "^15.5.3",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
+    "react": "^18.0.0-alpha-67222f044-20210915",
+    "react-dom": "^18.0.0-alpha-67222f044-20210915",
     "react-scripts": "4.0.3",
+    "subscriptions-transport-ws": "^0.9.19",
+    "suspensify": "^1.0.1",
     "typescript": "^4.4.3",
     "web-vitals": "^2.1.0"
   },
