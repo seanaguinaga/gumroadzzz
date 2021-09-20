@@ -1,6 +1,4 @@
-.App {
-  display: flex;
-  width: 100vw;
-  height: 100vh;
-  overflow: hidden;
+ion-item {
+  --padding-start: 0;
+  --inner-padding-end: 0;
 }

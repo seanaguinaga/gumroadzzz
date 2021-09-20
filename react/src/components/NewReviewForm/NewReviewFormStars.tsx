@@ -1,10 +1,8 @@
-import { IonInput } from "@ionic/react";
-import { useRef, useState } from "react";
+import { IonCardTitle, IonInput, IonItem, IonLabel } from "@ionic/react";
+import { useState } from "react";
 
 const NewReviewFormStars = () => {
-  let ratingInputRef = useRef<HTMLInputElement | null>(null);
-
-  let [currentRating, setCurrentRating] = useState(2);
+  let [currentRating, setCurrentRating] = useState(0);
 
   function executeRating(rating: number) {
     if (rating === currentRating) {
@@ -15,8 +13,12 @@ const NewReviewFormStars = () => {
   }
 
   return (
-    <>
-      <div className="rating">
+    <IonItem>
+      <IonLabel position="stacked">Rating</IonLabel>
+      <IonItem style={{ height: 0 }}>
+        <IonInput required name="rating" value={currentRating || undefined} />
+      </IonItem>
+      <IonCardTitle>
         {Array.from([1, 2, 3, 4, 5]).map((star) => {
           return (
             <i
@@ -29,9 +31,8 @@ const NewReviewFormStars = () => {
             />
           );
         })}
-      </div>
-      <IonInput name="rating" value={currentRating} />
-    </>
+      </IonCardTitle>
+    </IonItem>
   );
 };
 
