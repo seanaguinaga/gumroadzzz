@@ -764,6 +764,11 @@ export type ListAllProductsWithReviewsAndAggregateQueryVariables = Exact<{ [key:
 
 export type ListAllProductsWithReviewsAndAggregateQuery = { __typename?: 'query_root', product: Array<{ __typename?: 'product', id: any, name?: Maybe<string>, reviews_aggregate: { __typename?: 'review_aggregate', aggregate?: Maybe<{ __typename?: 'review_aggregate_fields', avg?: Maybe<{ __typename?: 'review_avg_fields', rating?: Maybe<number> }> }> }, reviews: Array<{ __typename?: 'review', id: any, rating: any, text: string }> }> };
 
+export type ListenToAllProductsWithReviewsAndAggregateSubscriptionVariables = Exact<{ [key: string]: never; }>;
+
+
+export type ListenToAllProductsWithReviewsAndAggregateSubscription = { __typename?: 'subscription_root', product: Array<{ __typename?: 'product', id: any, name?: Maybe<string>, reviews_aggregate: { __typename?: 'review_aggregate', aggregate?: Maybe<{ __typename?: 'review_aggregate_fields', avg?: Maybe<{ __typename?: 'review_avg_fields', rating?: Maybe<number> }> }> }, reviews: Array<{ __typename?: 'review', id: any, rating: any, text: string }> }> };
+
 
 export const InsertReviewDocument = gql`
     mutation insertReview($review_insert_input: review_insert_input!) {
@@ -846,3 +851,45 @@ export function useListAllProductsWithReviewsAndAggregateLazyQuery(baseOptions?:
 export type ListAllProductsWithReviewsAndAggregateQueryHookResult = ReturnType<typeof useListAllProductsWithReviewsAndAggregateQuery>;
 export type ListAllProductsWithReviewsAndAggregateLazyQueryHookResult = ReturnType<typeof useListAllProductsWithReviewsAndAggregateLazyQuery>;
 export type ListAllProductsWithReviewsAndAggregateQueryResult = Apollo.QueryResult<ListAllProductsWithReviewsAndAggregateQuery, ListAllProductsWithReviewsAndAggregateQueryVariables>;
+export const ListenToAllProductsWithReviewsAndAggregateDocument = gql`
+    subscription listenToAllProductsWithReviewsAndAggregate {
+  product {
+    id
+    name
+    reviews_aggregate {
+      aggregate {
+        avg {
+          rating
+        }
+      }
+    }
+    reviews {
+      id
+      rating
+      text
+    }
+  }
+}
+    `;
+
+/**
+ * __useListenToAllProductsWithReviewsAndAggregateSubscription__
+ *
+ * To run a query within a React component, call `useListenToAllProductsWithReviewsAndAggregateSubscription` and pass it any options that fit your needs.
+ * When your component renders, `useListenToAllProductsWithReviewsAndAggregateSubscription` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the subscription, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useListenToAllProductsWithReviewsAndAggregateSubscription({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useListenToAllProductsWithReviewsAndAggregateSubscription(baseOptions?: Apollo.SubscriptionHookOptions<ListenToAllProductsWithReviewsAndAggregateSubscription, ListenToAllProductsWithReviewsAndAggregateSubscriptionVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useSubscription<ListenToAllProductsWithReviewsAndAggregateSubscription, ListenToAllProductsWithReviewsAndAggregateSubscriptionVariables>(ListenToAllProductsWithReviewsAndAggregateDocument, options);
+      }
+export type ListenToAllProductsWithReviewsAndAggregateSubscriptionHookResult = ReturnType<typeof useListenToAllProductsWithReviewsAndAggregateSubscription>;
+export type ListenToAllProductsWithReviewsAndAggregateSubscriptionResult = Apollo.SubscriptionResult<ListenToAllProductsWithReviewsAndAggregateSubscription>;

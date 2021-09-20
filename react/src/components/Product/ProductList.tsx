@@ -1,11 +1,11 @@
 import { IonList, IonLoading, IonToast } from "@ionic/react";
 import * as React from "react";
-import { useListAllProductsWithReviewsAndAggregateQuery } from "../../generated/graphql";
+import { useListenToAllProductsWithReviewsAndAggregateSubscription } from "../../generated/graphql";
 import ProductListCard from "./ProductListCard";
 
 const ProductList = () => {
   let { data, loading, error } =
-    useListAllProductsWithReviewsAndAggregateQuery();
+    useListenToAllProductsWithReviewsAndAggregateSubscription();
 
   if (loading) {
     return <IonLoading isOpen />;
