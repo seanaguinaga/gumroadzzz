@@ -1,10 +1,17 @@
-import { IonButton } from "@ionic/react";
+import { IonButton, IonLoading, IonToast } from "@ionic/react";
 import { FormEvent, useRef } from "react";
+import { useHistory, useParams } from "react-router";
+import { useInsertReviewMutation } from "../../generated/graphql";
 import NewReviewFormStars from "./NewReviewFormStars";
 import NewReviewFormText from "./NewReviewFormText";
 
 const NewReviewForm = () => {
+  let history = useHistory();
+  let { productID } = useParams<{ productID: string }>();
+
   let ratingFormRef = useRef<HTMLFormElement | null>(null);
+
+  let [commit, { loading, error }] = useInsertReviewMutation();
 
   let handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -21,12 +28,27 @@ const NewReviewForm = () => {
           obj[item.name] = item.value;
         }
       }
-      console.log(obj);
+
+      try {
+        await commit({
+          variables: {
+            review_insert_input: { ...obj, ...{ product_id: productID } },
+          },
+          refetchQueries: ["listAllProductsWithReviewsAndAggregate"],
+          awaitRefetchQueries: true,
+        });
+
+        history.goBack();
+      } catch (error) {
+        console.log(error);
+      }
     }
   };
 
   return (
     <form ref={ratingFormRef} onSubmit={handleSubmit}>
+      {loading && <IonLoading isOpen />}
+      {error && <IonToast message={error.message} isOpen />}
       <NewReviewFormStars />
       <NewReviewFormText />
       <IonButton type="submit">Submit review</IonButton>

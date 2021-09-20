@@ -11,7 +11,7 @@ const ProductRatingsAggregateStars: React.FC<ProductRatingsAggregateStarsProps> 
     return (
       <IonItem lines="none">
         <div slot="start">
-          <h3>{ratingAggregate}</h3>
+          <h3>{Math.round(ratingAggregate * 10) / 10}</h3>
         </div>
         <h3>
           {Array.from([1, 2, 3, 4, 5]).map((star) => {
