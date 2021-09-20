@@ -1,4 +1,5 @@
 import { IonCard, IonCardContent, IonCardHeader } from "@ionic/react";
+import { Review } from "../../generated/graphql";
 import ProductCardTitle from "./ProductCardTitle";
 import ProductRatingsAggregateStars from "./ProductRatingsAggregateStars";
 import ProductReviewsList from "./ProductReviewsList";
@@ -7,7 +8,7 @@ interface ProductListCardProps {
   id: string;
   name: string;
   ratingAggregate: number;
-  reviews: any[];
+  reviews: Partial<Review>[];
 }
 
 const ProductListCard: React.FC<ProductListCardProps> = ({

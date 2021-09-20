@@ -26,7 +26,7 @@ const ProductReviewsListItem: React.FC<ProductReviewsListItemProps> = ({
           })}
         </h3>
       </div>
-      <h3>{text}</h3>
+      <h3 className="ion-text-wrap">{text}</h3>
     </IonItem>
   );
 };

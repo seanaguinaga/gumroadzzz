@@ -1,30 +1,30 @@
-import { IonList } from "@ionic/react";
+import { IonList, IonLoading, IonToast } from "@ionic/react";
 import * as React from "react";
+import { useListAllProductsWithReviewsAndAggregateQuery } from "../../generated/graphql";
 import ProductListCard from "./ProductListCard";
 
-const TestProducts = [
-  {
-    id: "hello",
-    name: "Test Product",
-    reviews_aggregate: {
-      aggregate: {
-        average: {
-          rating: 2,
-        },
-      },
-    },
-    reviews: [{ rating: 2, text: "First Review" }],
-  },
-];
-
 const ProductList = () => {
+  let { data, loading, error } =
+    useListAllProductsWithReviewsAndAggregateQuery();
+
+  if (loading) {
+    return <IonLoading isOpen />;
+  }
+
+  if (error) {
+    return <IonToast isOpen message={error.message} />;
+  }
+
   return (
     <IonList>
-      {TestProducts.map((product) => {
+      {data?.product.map((product) => {
         return (
           <ProductListCard
-            name={product.name}
-            ratingAggregate={product.reviews_aggregate.aggregate.average.rating}
+            key={product.id}
+            name={product?.name ?? "No Name"}
+            ratingAggregate={
+              product?.reviews_aggregate?.aggregate?.avg?.rating ?? 0
+            }
             reviews={product.reviews}
             id={product.id}
           />

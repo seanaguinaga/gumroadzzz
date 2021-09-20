@@ -762,7 +762,7 @@ export type InsertReviewMutation = { __typename?: 'mutation_root', insert_review
 export type ListAllProductsWithReviewsAndAggregateQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type ListAllProductsWithReviewsAndAggregateQuery = { __typename?: 'query_root', product: Array<{ __typename?: 'product', id: any, name?: Maybe<string>, reviews_aggregate: { __typename?: 'review_aggregate', aggregate?: Maybe<{ __typename?: 'review_aggregate_fields', avg?: Maybe<{ __typename?: 'review_avg_fields', rating?: Maybe<number> }> }> }, reviews: Array<{ __typename?: 'review', rating: any, text: string }> }> };
+export type ListAllProductsWithReviewsAndAggregateQuery = { __typename?: 'query_root', product: Array<{ __typename?: 'product', id: any, name?: Maybe<string>, reviews_aggregate: { __typename?: 'review_aggregate', aggregate?: Maybe<{ __typename?: 'review_aggregate_fields', avg?: Maybe<{ __typename?: 'review_avg_fields', rating?: Maybe<number> }> }> }, reviews: Array<{ __typename?: 'review', id: any, rating: any, text: string }> }> };
 
 export type GetReviewsAggregateQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -824,6 +824,7 @@ export const ListAllProductsWithReviewsAndAggregateDocument = gql`
       }
     }
     reviews {
+      id
       rating
       text
     }

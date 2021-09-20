@@ -13,6 +13,7 @@ const PRODUCT_LIST = gql`
         }
       }
       reviews {
+        id
         rating
         text
       }
