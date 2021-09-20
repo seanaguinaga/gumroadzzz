@@ -43,14 +43,9 @@ const client = new ApolloClient({
   cache: new InMemoryCache(),
 });
 
-const container = document.getElementById("root");
-
-if (container) {
-  const root = ReactDOM.createRoot(container);
-
-  root.render(
-    <ApolloProvider client={client}>
-      <App />
-    </ApolloProvider>
-  );
-}
+ReactDOM.render(
+  <ApolloProvider client={client}>
+    <App />
+  </ApolloProvider>,
+  document.getElementById("root")
+);
