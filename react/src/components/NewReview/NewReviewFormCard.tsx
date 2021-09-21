@@ -8,11 +8,7 @@ import {
 import "./NewReviewCard.css";
 import NewReviewForm from "./NewReviewForm";
 
-interface NewReviewFormCardProps {
-  productID: string;
-}
-
-const NewReviewFormCard: React.FC<NewReviewFormCardProps> = ({ productID }) => {
+const NewReviewFormCard: React.FC = () => {
   return (
     <IonCard className="center">
       <IonCardHeader>

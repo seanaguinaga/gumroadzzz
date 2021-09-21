@@ -6,12 +6,9 @@ import {
   IonPage,
   IonToolbar,
 } from "@ionic/react";
-import { useParams } from "react-router";
 import NewReviewFormCard from "../components/NewReview/NewReviewFormCard";
 
 const Review: React.FC = () => {
-  let { productID } = useParams<{ productID: string }>();
-
   return (
     <IonPage>
       <IonHeader>
@@ -22,7 +19,7 @@ const Review: React.FC = () => {
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen>
-        <NewReviewFormCard productID={productID} />
+        <NewReviewFormCard />
       </IonContent>
     </IonPage>
   );
