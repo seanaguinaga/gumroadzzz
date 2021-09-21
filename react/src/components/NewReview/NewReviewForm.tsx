@@ -51,7 +51,9 @@ const NewReviewForm = () => {
       {error && <IonToast message={error.message} isOpen />}
       <NewReviewFormStars />
       <NewReviewFormText />
-      <IonButton type="submit">Submit review</IonButton>
+      <IonButton type="submit" color="medium">
+        Submit review
+      </IonButton>
     </form>
   );
 };

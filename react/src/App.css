@@ -2,3 +2,12 @@ ion-item {
   --padding-start: 0;
   --inner-padding-end: 0;
 }
+
+ion-card {
+  margin: auto;
+  max-width: 440px;
+}
+
+i {
+  color: #ffdf00;
+}

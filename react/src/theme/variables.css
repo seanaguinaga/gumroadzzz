@@ -77,11 +77,19 @@ http://ionicframework.com/docs/theming/ */
 }
 
 @media (prefers-color-scheme: dark) {
-  ion-list {
+  .ios ion-list {
     background: #000000 !important;
   }
 
-  ion-card ion-list {
+  .md ion-list {
+    background: #121212 !important;
+  }
+
+  .md ion-card ion-list {
+    background: #1e1e1e !important;
+  }
+
+  .ios ion-card ion-list {
     background: #1c1c1d !important;
   }
   /*

@@ -7,7 +7,7 @@ interface ProductNewReviewButtonProps {
 const ProductNewReviewButton: React.FC<ProductNewReviewButtonProps> = ({
   productID,
 }) => (
-  <IonButton routerLink={`/review/${productID}`} slot="end">
+  <IonButton routerLink={`/review/${productID}`} slot="end" color="medium">
     Add review
   </IonButton>
 );
