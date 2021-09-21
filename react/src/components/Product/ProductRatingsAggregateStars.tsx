@@ -20,7 +20,11 @@ const ProductRatingsAggregateStars: React.FC<ProductRatingsAggregateStarsProps> 
                 key={star}
                 rating-value={star}
                 className={`rating__star ${
-                  star <= ratingAggregate ? "fas" : "far"
+                  star <= ratingAggregate
+                    ? "fas"
+                    : star <= ratingAggregate + 0.5
+                    ? "fas fa-star-half"
+                    : "far"
                 } fa-star`}
               />
             );

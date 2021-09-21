@@ -2,14 +2,19 @@ import { IonCardTitle, IonInput, IonItem, IonLabel } from "@ionic/react";
 import { useState } from "react";
 
 const NewReviewFormStars = () => {
-  let [currentRating, setCurrentRating] = useState(0);
+  let [currentRating, setCurrentRating] = useState(2.5);
 
   function executeRating(rating: number) {
-    if (rating === currentRating) {
-      setCurrentRating(0);
-    } else {
-      setCurrentRating(rating);
-    }
+    console.log({ currentRating, rating });
+    setCurrentRating((currentRating) => {
+      if (rating === currentRating) {
+        return rating - 0.5;
+      } else if (rating === currentRating + 0.5) {
+        return 0;
+      } else {
+        return rating;
+      }
+    });
   }
 
   return (
@@ -25,7 +30,11 @@ const NewReviewFormStars = () => {
               key={star}
               rating-value={star}
               className={`rating__star ${
-                star <= currentRating ? "fas" : "far"
+                star <= currentRating
+                  ? "fas"
+                  : star <= currentRating + 0.5
+                  ? "fas fa-star-half"
+                  : "far"
               } fa-star`}
               onClick={() => executeRating(star)}
             />
